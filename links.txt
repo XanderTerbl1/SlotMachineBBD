@@ -13,3 +13,6 @@ https://graph.windows.net/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/b579ed58-df
 
 
 https://developer.microsoft.com/en-us/graph/graph-explorer
+
+
+To Get Data: https://graph.windows.net/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/b579ed58-df35-4904-9abc-01667dfe2158/calendar/events
