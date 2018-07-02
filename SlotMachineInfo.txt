@@ -1,0 +1,12 @@
+Display name
+SlotMachine
+Application type
+Web app / API
+Home page
+https://localhost:44302/
+Application ID
+2bd95660-7a62-4dbf-879d-f60294edf8d9
+Object ID
+eac6b6c6-5548-4c96-8e4d-23f3dce31c14
+Managed application in local directory
+SlotMachine
