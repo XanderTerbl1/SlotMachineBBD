@@ -4,3 +4,5 @@ https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory
 https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-scenarios#single-page-application-spa
 https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-scenarios
 https://graph.windows.net/cccbf502-6b91-40d6-be02-5ffa0eb711d6
+
+https://gist.github.com/mikegeyser/08242a15e6801fe75a54c400ad6d9b3e
