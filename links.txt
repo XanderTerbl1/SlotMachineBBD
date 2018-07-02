@@ -3,3 +3,4 @@ https://github.com/Azure-Samples/active-directory-javascript-singlepageapp-dotne
 https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-protocols-openid-connect-code
 https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-scenarios#single-page-application-spa
 https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-authentication-scenarios
+https://graph.windows.net/cccbf502-6b91-40d6-be02-5ffa0eb711d6
