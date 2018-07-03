@@ -112,6 +112,23 @@
 }());
 
 */
+
+var currentURL = window.location.href;
+var arrhash = currentURL.split("#");
+var arrAmp;
+var accessToken;
+if (arrhash.length > 1) {
+    var arrtemp = arrhash[1];
+    arrAmp = arrtemp.split("&");
+    console.log(arrAmp);
+    
+    accessToken = arrAmp[0];
+    accessToken = accessToken.replace("access_token=", "");
+    console.log(accessToken);
+}
+
+
+
 function change() {
     console.log("here");
 /*    window.location.href = "https://login.microsoftonline.com/cccbf502-6b91-40d6-be02-5ffa0eb711d6/oauth2/authorize?" +
@@ -122,7 +139,7 @@ function change() {
         "&scope=openid" +
         "&state=12345" +
         "&nonce=7362CAEA-9CA5-4B43-9BA3-34D7C303EBA7";*/
-
+   
     window.location.href = "https://login.microsoftonline.com/cccbf502-6b91-40d6-be02-5ffa0eb711d6/oauth2/v2.0/authorize?" +
         "client_id=2bd95660-7a62-4dbf-879d-f60294edf8d9" +
         "&response_type=id_token+token" +
@@ -131,5 +148,7 @@ function change() {
         "&response_mode=fragment" +
         "&state=12345" +
         "&nonce=678910";
+
+
 }
 
