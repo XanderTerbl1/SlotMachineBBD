@@ -1,144 +1,39 @@
-﻿    
-/*(function () {
-
-    // Enter Global Config Values & Instantiate ADAL AuthenticationContext
-    window.config = {
-        instance: 'https://login.microsoftonline.com/',
-        tenant: 'BBDZA.onmicrosoft.com',
-        clientId: '2bd95660-7a62-4dbf-879d-f60294edf8d9',
-        postLogoutRedirectUri: window.location.origin,
-        cacheLocation: 'localStorage' // enable this for IE, as sessionStorage does not work for localhost.
-    };
-    var authContext = new AuthenticationContext(config);
-
-    // Get UI jQuery Objects
-    var $panel = $(".panel-body");
-    var $userDisplay = $(".app-user");
-    var $signInButton = $(".app-login");
-    var $signOutButton = $(".app-logout");
-    var $errorMessage = $(".app-error");
-
-    // Check For & Handle Redirect From AAD After Login
-    var isCallback = authContext.isCallback(window.location.hash);
-    authContext.handleWindowCallback();
-    $errorMessage.html(authContext.getLoginError());
-
-    if (isCallback && !authContext.getLoginError()) {
-        window.location = authContext._getItem(authContext.CONSTANTS.STORAGE.LOGIN_REQUEST);
-    }
-
-    // Check Login Status, Update UI
-    var user = authContext.getCachedUser();
-    if (user) {
-        $userDisplay.html(user.userName);
-        $userDisplay.show();
-        $signInButton.hide();
-        $signOutButton.show();
-    } else {
-        $userDisplay.empty();
-        $userDisplay.hide();
-        $signInButton.show();
-        $signOutButton.hide();
-    }
-
-    // Handle Navigation Directly to View
-    window.onhashchange = function () {
-        loadView(stripHash(window.location.hash));
-    };
-    window.onload = function () {
-        $(window).trigger("hashchange");
-    };
-
-    // Register NavBar Click Handlers
-    $signOutButton.click(function () {
-        authContext.logOut();
-    });
-    $signInButton.click(function () {
-        authContext.login();
-    });
-
-    // Route View Requests To Appropriate Controller
-    function loadCtrl(view) {
-        switch (view.toLowerCase()) {
-            case 'home':
-                return homeCtrl;
-            case 'todolist':
-                return todoListCtrl;
-            case 'userdata':
-                return userDataCtrl;
-        }
-    }
-
-    // Show a View
-    function loadView(view) {
-
-        $errorMessage.empty();
-        var ctrl = loadCtrl(view);
-
-        if (!ctrl)
-            return;
-
-        // Check if View Requires Authentication
-        if (ctrl.requireADLogin && !authContext.getCachedUser()) {
-            authContext.config.redirectUri = window.location.href;
-            authContext.login();
-            return;
-        }
-
-        // Load View HTML
-        $.ajax({
-            type: "GET",
-            url: "App/Views/" + view + '.html',
-            dataType: "html"
-        }).done(function (html) {
-
-            // Show HTML Skeleton (Without Data)
-            var $html = $(html);
-            $html.find(".data-container").empty();
-            $panel.html($html.html());
-            ctrl.postProcess(html);
-
-        }).fail(function () {
-            $errorMessage.html('Error loading page.');
-        }).always(function () {
-
-        });
-    }
-
-    function stripHash(view) {
-        return view.substr(view.indexOf('#') + 1);
-    }
-
-}());
-
-*/
-
-var currentURL = window.location.href;
+﻿
+/* To check if the URL contains the access token*/
+var currentURL = window.location.href;                 
 var arrhash = currentURL.split("#");
 var arrAmp;
 var accessToken;
+
 if (arrhash.length > 1) {
     var arrtemp = arrhash[1];
     arrAmp = arrtemp.split("&");
-    console.log(arrAmp);
     
     accessToken = arrAmp[0];
     accessToken = accessToken.replace("access_token=", "");
-    console.log(accessToken);
+    API(accessToken);
+}
+
+/*starts get Request from Microsoft graph Api*/
+ 
+function API(token) {
+    var key = "Bearer " + token;
+    var url = "https://graph.microsoft.com/v1.0/cccbf502-6b91-40d6-be02-5ffa0eb711d6/users/15000b65-4d66-4d8a-9a03-980bed8be18c/calendar/events";
+    console.log(httpGet(url, key));
 }
 
 
-
-function change() {
-    console.log("here");
-/*    window.location.href = "https://login.microsoftonline.com/cccbf502-6b91-40d6-be02-5ffa0eb711d6/oauth2/authorize?" +
-        "client_id=2bd95660-7a62-4dbf-879d-f60294edf8d9" +
-        "&response_type=id_token+token" +
-        "&redirect_uri=https%3A%2F%2Flocalhost%3A44302" +
-        "&response_mode=form_post" +
-        "&scope=openid" +
-        "&state=12345" +
-        "&nonce=7362CAEA-9CA5-4B43-9BA3-34D7C303EBA7";*/
+function httpGet(url, key) {
+    console.log(key);
+    console.log("IN REQUEST");
+    var req = new XMLHttpRequest();
+    req.open("GET", url, false);
+    req.setRequestHeader("Authorization", key);
+    req.send(null);
+    return req.responseText;
+}
+/*Authorize the Pi and get access token which is returned in the URL from redirect from Azure*/
+function Authorize() {
    
     window.location.href = "https://login.microsoftonline.com/cccbf502-6b91-40d6-be02-5ffa0eb711d6/oauth2/v2.0/authorize?" +
         "client_id=2bd95660-7a62-4dbf-879d-f60294edf8d9" +
